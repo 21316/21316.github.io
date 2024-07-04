@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recaptcha v3 Example</title>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LewLQgqAAAAANZwJYN-7W9VJNSUQexlealUGof7"></script>
+    <script>
+        // Recaptcha v3でトークンを生成する関数
+        function generateToken() {
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6LewLQgqAAAAANZwJYN-7W9VJNSUQexlealUGof7', { action: 'homepage' })
+                    .then(function(token) {
+                        // トークンを取得した後の処理をここに記述する
+                        console.log(token);
+                        // 例えば、トークンをサーバーに送信する処理を追加する
+                        document.getElementById('recaptchaToken').value = token;
+                    });
+            });
+        }
+    </script>
+</head>
+<body onload="generateToken()">
+    <!-- フォーム例 -->
+    <form action="/your-server-endpoint" method="POST">
+        <!-- 他のフォーム要素を追加 -->
+
+        <!-- Recaptchaのトークンを保存するための隠しフィールド -->
+        <input type="hidden" id="recaptchaToken" name="recaptchaToken">
+
+        <!-- Submitボタン -->
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
