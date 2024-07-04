@@ -1,38 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recaptcha v3 Example</title>
-    <script src="https://www.google.com/recaptcha/api.js?render=6LewLQgqAAAAANZwJYN-7W9VJNSUQexlealUGof7"></script>
-    <script>
-        // Recaptcha v3でトークンを生成する関数
-        function generateToken() {
-            grecaptcha.ready(function() {
-                grecaptcha.execute('6LewLQgqAAAAANZwJYN-7W9VJNSUQexlealUGof7', { action: 'homepage' })
-                    .then(function(token) {
-                        // トークンを取得した後の処理をここに記述する
-                        console.log(token);
-                        // 例えば、トークンをサーバーに送信する処理を追加する
-                        document.getElementById('recaptchaToken').value = token;
-                    });
-            });
-        }
-    </script>
-</head>
-<body onload="generateToken()">
-    <!-- Recaptcha v3の生のボタン -->
-    <button onclick="generateToken()">Verify</button>
-
-    <!-- フォームの例 -->
-    <form action="/your-server-endpoint" method="POST">
-        <!-- 他のフォーム要素を追加 -->
-
-        <!-- Recaptchaのトークンを保存するための隠しフィールド -->
-        <input type="hidden" id="recaptchaToken" name="recaptchaToken">
-
-        <!-- Submitボタン -->
-        <button type="submit">Submit</button>
-    </form>
-</body>
-</html>
+ <script src="https://www.google.com/recaptcha/api.js"></script>
+ <script>
+   function onSubmit(token) {
+     document.getElementById("demo-form").submit();
+   }
+ </script>
+<button class="g-recaptcha" 
+        data-sitekey="reCAPTCHA_site_key" 
+        data-callback='onSubmit' 
+        data-action='submit'>Submit</button>
+<script src="https://www.google.com/recaptcha/api.js?render=6LewLQgqAAAAANZwJYN-7W9VJNSUQexlealUGof7"></script>
+<script>
+      function onClick(e) {
+        e.preventDefault();
+        grecaptcha.ready(function() {
+          grecaptcha.execute('6LewLQgqAAAAANZwJYN-7W9VJNSUQexlealUGof7', {action: 'submit'}).then(function(token) {
+              // Add your logic to submit to your backend server here.
+          });
+        });
+      }
+  </script>
+  {
+  "success": true|false,      // whether this request was a valid reCAPTCHA token for your site
+  "score": number             // the score for this request (0.0 - 1.0)
+  "action": string            // the action name for this request (important to verify)
+  "challenge_ts": timestamp,  // timestamp of the challenge load (ISO format yyyy-MM-dd'T'HH:mm:ssZZ)
+  "hostname": string,         // the hostname of the site where the reCAPTCHA was solved
+  "error-codes": [...]        // optional
+}
