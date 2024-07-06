@@ -1,9 +1,9 @@
 <head>
   <title>Recaptcha v3 Example</title>
-  <script src="https://www.google.com/recaptcha/api.js?render=YOUR_SITE_KEY"></script>
+  <script src="https://www.google.com/recaptcha/api.js?render=6LewLQgqAAAAANZwJYN-7W9VJNSUQexlealUGof7"></script>
 </head>
 <body>
-  <form id="my-form" action="YOUR_BACKEND_URL" method="POST">
+  <form id="my-form" action="21316.github.io" method="POST">
     <input type="text" name="username" required>
     <input type="password" name="password" required>
     <button type="submit">Submit</button>
@@ -13,7 +13,7 @@
     grecaptcha.ready(function() {
       document.getElementById('my-form').addEventListener('submit', function(event) {
         event.preventDefault();  // デフォルトのフォーム送信を防ぐ
-        grecaptcha.execute('YOUR_SITE_KEY', {action: 'submit'}).then(function(token) {
+        grecaptcha.execute('6LewLQgqAAAAANZwJYN-7W9VJNSUQexlealUGof7', {action: 'submit'}).then(function(token) {
           // トークンをフォームに追加
           var form = document.getElementById('my-form');
           var input = document.createElement('input');
