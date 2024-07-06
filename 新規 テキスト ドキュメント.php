@@ -1,6 +1,6 @@
 <?php
 $response = $_POST['recaptcha_response'];
-$secret = 'YOUR_SECRET_KEY';
+$secret = '6LewLQgqAAAAAB2h4A986PuSCWbphU2T2DaeeZuc';
 
 // Recaptcha APIへのリクエスト
 $verifyResponse = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$secret}&response={$response}");
