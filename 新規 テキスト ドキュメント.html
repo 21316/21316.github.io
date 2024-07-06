@@ -1,4 +1,4 @@
-<script src="https://www.google.com/recaptcha/api.js?render=reCAPCHAサイトキー"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LewLQgqAAAAANZwJYN-7W9VJNSUQexlealUGof7"></script>
 
 <% provide(:title, "Log in") %>
 <h1>Log in</h1>
@@ -30,7 +30,7 @@ $("#login").on("click", function(e) {
   // データ送信をSTOP
   e.preventDefault();
   // reCAPTCHA tokenを生成
-  grecaptcha.execute('reCAPCHAサイトキー', { action: 'login' }).then(function (token) {
+  grecaptcha.execute('6LewLQgqAAAAANZwJYN-7W9VJNSUQexlealUGof7', { action: 'login' }).then(function (token) {
     var recaptchaResponse = document.getElementById('recaptchaResponse');
     recaptchaResponse.value = token;
     // フォームを送信
@@ -41,7 +41,7 @@ $("#login").on("click", function(e) {
 
 class SessionsController < ApplicationController
 
-  RECAPTCHA_SECRET_KEY = 'reCAPTCHAシークレットキー'
+  RECAPTCHA_SECRET_KEY = '6LewLQgqAAAAAB2h4A986PuSCWbphU2T2DaeeZuc'
   RECAPTCHA_SITEVERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify'
 
   def new
