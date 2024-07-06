@@ -1,29 +1,30 @@
- <script src="https://www.google.com/recaptcha/api.js"></script>
- <script>
-   function onSubmit(token) {
-     document.getElementById("demo-form").submit();
-   }
- </script>
-<button class="g-recaptcha" 
-        data-sitekey="6LewLQgqAAAAANZwJYN-7W9VJNSUQexlealUGof7" 
-        data-callback='onSubmit' 
-        data-action='submit'>Submit</button>
-<script src="https://www.google.com/recaptcha/api.js?render=6LewLQgqAAAAANZwJYN-7W9VJNSUQexlealUGof7"></script>
-<script>
-      function onClick(e) {
-        e.preventDefault();
-        grecaptcha.ready(function() {
-          grecaptcha.execute('6LewLQgqAAAAANZwJYN-7W9VJNSUQexlealUGof7', {action: 'submit'}).then(function(token) {
-              // Add your logic to submit to your backend server here.
-          });
+<head>
+  <title>Recaptcha v3 Example</title>
+  <script src="https://www.google.com/recaptcha/api.js?render=YOUR_SITE_KEY"></script>
+</head>
+<body>
+  <form id="my-form" action="YOUR_BACKEND_URL" method="POST">
+    <input type="text" name="username" required>
+    <input type="password" name="password" required>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    grecaptcha.ready(function() {
+      document.getElementById('my-form').addEventListener('submit', function(event) {
+        event.preventDefault();  // デフォルトのフォーム送信を防ぐ
+        grecaptcha.execute('YOUR_SITE_KEY', {action: 'submit'}).then(function(token) {
+          // トークンをフォームに追加
+          var form = document.getElementById('my-form');
+          var input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'recaptcha_response';
+          input.value = token;
+          form.appendChild(input);
+          // フォーム送信を行う
+          form.submit();
         });
-      }
+      });
+    });
   </script>
-  {
-  "success": true|false,      // whether this request was a valid reCAPTCHA token for your site
-  "score": number             // the score for this request (0.0 - 1.0)
-  "action": string            // the action name for this request (important to verify)
-  "challenge_ts": timestamp,  // timestamp of the challenge load (ISO format yyyy-MM-dd'T'HH:mm:ssZZ)
-  "hostname": string,         // the hostname of the site where the reCAPTCHA was solved
-  "error-codes": [...]        // optional
-}
+</body>
